@@ -51,7 +51,7 @@ Blue Gem Quad - Bear
 Yellow Gem Quad - Fox
 
 ## Start:
-You start with 10 wood, however, you can't take it out of that pile as it's only for your campfire. 10 wood will always be locked(if available) for your campfire. You have 3x3 grid from the camp and such. You also get the grids that have a radius of 4 away because you need some way to start production. So you get 12 units of land. You don't get the corners, but you can unlock that next if you want.
+You start with 10 wood, however, you can't take it out of that pile as it's only for your campfire. 10 wood will always be locked(if available) for your campfire. You have 3x3 grid from the camp and such. You also get the grids that have a radius of 4 away because you need some way to start production. So you get 12 units of land. You don't get the corners, but you can unlock that next if you want. They should get 1 gas plot to start with though so they can understand mechanics. Minerals only apply at deeper tiers.
 
 ## Tile Unlocking & Expansion
 - Only tiles sharing an edge with an unlocked tile can be unlocked. Diagonal tiles will cost 1.25x the regular adjacent tiles.
