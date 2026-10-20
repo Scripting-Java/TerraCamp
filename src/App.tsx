@@ -2,23 +2,29 @@ import TopBar from './components/TopBar/TopBar'
 import ResBar from './components/ResBar/ResBar'
 import GameGrid from './components/GameGrid/GameGrid'
 import getStartingTiles from './utils/getStartingTiles'
+import getProduction from './utils/getProd'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 const startingTiles = getStartingTiles()
 function App() {
-  const [wood, setWood] = useState(10)
-  const [gas, setGas] = useState(0)
-  const [fur, setFur] = useState(0)
-  const [minerals, setMinerals] = useState(0)
-
+  const [res, setRes] = useState({
+    wood: 10, gas: 0, fur: 0, minerals: 0
+  })
+  useEffect(()=>{
+    
+  })
 
   return (
     <section>
       <TopBar />
-      <ResBar wood={wood} gas={gas} fur={fur} minerals={minerals} />
-      <section className='campfire'>
+      <ResBar
+        wood={getProduction(startingTiles).wood+res.wood}
+        gas={getProduction(startingTiles).gas+res.gas}
+        fur={getProduction(startingTiles).fur+res.fur}
+        minerals={getProduction(startingTiles).minerals+res.minerals} />
+      <section>
         <GameGrid tiles={startingTiles} />
       </section>
     </section>

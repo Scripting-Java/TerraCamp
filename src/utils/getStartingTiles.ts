@@ -19,7 +19,7 @@ function getStartingTiles(): Tile[]{
                 numEarthGiven++
             }
         }
-        if(i==8 && !earthGiven){
+        if(i===8 && !earthGiven){
             tileType = 'earth'
         }
         tiles.push({id:i, type: tileType})
