@@ -1,0 +1,19 @@
+.resbar{
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px;
+}
+
+.res{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px;
+    background-color: bisque;
+    border: 2px solid rgb(114, 168, 59);
+    border-radius: 10px;
+    color: #26351f;
+    min-width: 70px;
+}
