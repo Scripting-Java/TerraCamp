@@ -1,4 +1,5 @@
 import './ResBar.css'
+import formatRes from '../../utils/formatters'
 
 interface resBar{
     wood: number,
@@ -12,19 +13,19 @@ function ResBar({wood, gas,fur, minerals}:resBar){
             <div className='res'>
                 <div>
                     <span>Wood: </span>
-                    <span>{wood}</span>
+                    <span>{formatRes(wood)}</span>
                 </div>
                 <div>
                     <span>Gas: </span>
-                    <span>{gas}</span>
+                    <span>{formatRes(gas)}</span>
                 </div>
                 <div>
                     <span>Fur: </span>
-                    <span>{fur}</span>
+                    <span>{formatRes(fur)}</span>
                 </div>
                 <div>
                     <span>Minerals: </span>
-                    <span>{minerals}</span>
+                    <span>{formatRes(minerals)}</span>
                 </div>
             </div>
         </section>

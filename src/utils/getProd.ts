@@ -12,7 +12,7 @@ function resPerMin(tiles: Tile[], type: Tile['type'], prod: number): number{
     return prod*getNumTiles(tiles,type)
 }
 
-interface resourceCarrier{
+export interface resourceCarrier{
     wood: number,
     gas: number,
     fur:number,
