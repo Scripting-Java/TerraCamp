@@ -3,7 +3,7 @@ import ResBar from './components/ResBar/ResBar'
 import GameGrid from './components/GameGrid/GameGrid'
 import getStartingTiles from './utils/getStartingTiles'
 import moveTick from './utils/gameTick'
-import { handleDayNight } from './utils/dayNightCycle'
+import { handleDayNight } from './utils/Phase/Weather/dayNightCycle'
 
 import { useState, useEffect } from 'react'
 import './App.css'

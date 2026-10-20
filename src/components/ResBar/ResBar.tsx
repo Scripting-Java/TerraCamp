@@ -1,5 +1,5 @@
 import './ResBar.css'
-import formatRes from '../../utils/formatters'
+import formatRes from '../../utils/formatters/formatters'
 
 interface resBar{
     wood: number,
