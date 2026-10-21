@@ -14,12 +14,16 @@ function SideBar({ onInfo, infoOpen }: sidebar) {
                     <Info size={22} />
                 </button>
             </div>
+            <div className="tooltip" data-tooltip="Shop">
             <button className="sidebarButton" title="Shop For Upgrades">
                 <ShoppingBag size={22} />
             </button>
+            </div>
+            <div className="tooltip" data-tooltip="Settings">
             <button className="sidebarButton" title="Settings">
                 <Settings size={22} />
             </button>
+            </div>
         </nav>
     )
 }

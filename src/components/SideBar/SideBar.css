@@ -1,25 +1,26 @@
-.sidebar{
-    position:fixed;
-    left:12px;
-    top:50%;
-    transform:translateY(-50%);
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    padding:10px;
+.sidebar {
+    position: fixed;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
     background: #cfbea0;
-    border: 3px solid rgb(114,168,59);
-    border-radius:14px;
+    border: 3px solid rgb(114, 168, 59);
+    border-radius: 14px;
     box-shadow: 4px 4px 0 #58381f;
     z-index: 100;
 }
-.sidebarButton{
+
+.sidebarButton {
     display: flex;
     align-items: center;
     justify-content: center;
-    width:45px;
-    height:45px;
-    padding:0;
+    width: 45px;
+    height: 45px;
+    padding: 0;
     color: #26351f;
     background: #ecd199;
     border-radius: 9px;
@@ -29,39 +30,40 @@
         box-shadow 150ms ease;
 }
 
-.sidebarButton:hover{
+.sidebarButton:hover {
     background: #b8d49b;
     transform: scale(1.1);
     box-shadow: 2px 2px 0 #58381f;
 }
 
-.sidebarButton:active{
-    transform:scale(0.96);
+.sidebarButton:active {
+    transform: scale(0.96);
     box-shadow: none;
 }
-.sidebarButton.active{
+
+.sidebarButton.active {
     background: #b8d49b;
     border-color: #426b32;
-    box-shadow:  0 0 0 2px #85ad72;
+    box-shadow: 0 0 0 2px #85ad72;
 }
 
-.sidebarButton:focus-visible{
+.sidebarButton:focus-visible {
     outline: 3px solid #58381f;
     outline-offset: 3px;
 }
 
-.tooltip{
-    position:relative;
+.tooltip {
+    position: relative;
 }
 
-.tooltip::after{
+.tooltip::after {
     content: attr(data-tooltip);
     position: absolute;
-    left:58px;
-    top:50%;
+    left: 58px;
+    top: 50%;
     transform: translateY(-50%);
     background: #cfbea0;
-    color:#26351f;
+    color: #26351f;
     border: 2px solid #72983b;
     border-radius: 6px;
     padding: 6px 10px;
@@ -69,9 +71,10 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 150ms ease;
-    z-index: 101;
+    z-index: 1;
 }
-.tooltip:hover::after{
-    opacity:1;
+
+.tooltip:hover::after {
+    opacity: 1;
     visibility: visible;
 }

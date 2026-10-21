@@ -1,12 +1,6 @@
 .infoToggle{
     position:fixed;
-    left:100px;
-    top:50%;
-    transform: translateY(-50%);
-    background: #7c5d2f;
-    border: 3px solid rgb(99, 148, 94);
-    border-radius: 12px;
-    box-shadow: 4px 4px 0 #58381f;
-    padding: 12px;
+    width:max-content;
+    border-radius: 15px;
     z-index: 99;
 }

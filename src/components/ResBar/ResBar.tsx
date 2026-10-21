@@ -7,8 +7,9 @@ interface resBar{
     fur: number,
     minerals: number,
     rates:{woodGain: number, woodUse:number,gasGain:number,furGain:number,mineralsGain:number}
+    header?: React.ReactNode
 }
-function ResBar({wood, gas,fur, minerals, rates}:resBar){
+function ResBar({wood, gas,fur, minerals, rates, header}:resBar){
     const resources = [
         {name: 'Wood', amt: wood, gain: rates.woodGain, use:rates.woodUse},
         {name:'Gas', amt:gas, gain:rates.gasGain, use:0},
@@ -18,6 +19,7 @@ function ResBar({wood, gas,fur, minerals, rates}:resBar){
     return(
         <section className='resbar'>
             <div className='res'>
+                {header}
                 {resources.map(resource=>(
                     <div className='resource' key={resource.name}>
                         <div>

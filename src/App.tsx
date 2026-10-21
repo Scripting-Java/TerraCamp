@@ -34,6 +34,7 @@ function App() {
     furGain: prod.fur/60,
     mineralsGain: prod.minerals/60
   }
+  const [infoPos, setInfoPos] = useState({x:100,y:200})
   useEffect(() => {
     const interval = setInterval(() => {
       setGame(prev => {
@@ -55,7 +56,7 @@ function App() {
       <TopBar />
       <SideBar onInfo={()=>setInfo(prev=>!prev)} infoOpen={info} />
         {info && (
-          <InfoToggle wood={game.res.wood} gas={game.res.gas} fur={game.res.fur} minerals={game.res.minerals} rates={rates} />
+          <InfoToggle wood={game.res.wood} gas={game.res.gas} fur={game.res.fur} minerals={game.res.minerals} rates={rates} pos={infoPos} setPos={setInfoPos}/>
         )}
       <button onClick={() => setGame(prev => ({
         ...prev, elapsedSec:prev.elapsedSec+50}))}>
