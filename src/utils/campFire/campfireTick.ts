@@ -1,7 +1,7 @@
 import type { campfireStatus } from "./campfire";
 import { dayFuel, nightFuel, gracePeriod } from "./campfire";
 import type { resourceCarrier } from "../getProd";
-import type { phase } from "../Phase/Weather/dayNightCycle";
+import type { phase } from "../Phase/dayNightCycle";
 
 interface campfireTick {
     campfire: campfireStatus,
@@ -48,3 +48,4 @@ function campfireTick(campfire: campfireStatus, res: resourceCarrier, phase: pha
 
 
 }
+export default campfireTick
