@@ -5,43 +5,56 @@ import getStartingTiles from './utils/getStartingTiles'
 import moveTick from './utils/gameTick'
 import type { campfireStatus } from './utils/campFire/campfire'
 import { handleDayNight } from './utils/Phase/dayNightCycle'
+import getProduction from './utils/getProd'
 
 import { useState, useEffect } from 'react'
 import './App.css'
 
 const startingTiles = getStartingTiles()
-interface game{
-  res:{wood:number, gas:number,fur:number,minerals:number}
-  campfire:campfireStatus
+interface game {
+  elapsedSec: number,
+  res: { wood: number, gas: number, fur: number, minerals: number }
+  campfire: campfireStatus
 }
 function App() {
-  const [elapsedSec, setElapsedSec] = useState(0)
-  const time = handleDayNight(elapsedSec)
-  const[game,setGame]= useState<game>({
-    res:{wood:10,gas:0,fur:0,minerals:0},
-    campfire:{lit:true,elapsed:0,grace:0,tier:'small',style:'default'} 
+  const [game, setGame] = useState<game>({
+    elapsedSec: 0,
+    res: { wood: 10, gas: 0, fur: 0, minerals: 0 },
+    campfire: { lit: true, elapsed: 0, grace: 0, tier: 'small', style: 'default' }
   })
+  const time = handleDayNight(game.elapsedSec)
   const tiles = startingTiles
-useEffect(()=>{
-  const interval = setInterval(()=>{
-    setElapsedSec(prev=>{
-      const next = prev+1
-      return next
-    })
-    setGame(prev=>{
-      const next = handleDayNight(elapsedSec+1)
-      const result = moveTick(prev.res,tiles,prev.campfire,next.phase)
-      return{
-        res:result.resource,
-        campfire: result.campfire
-      }
-    })
-  }, 1000)
-  return ()=> clearInterval(interval)
-}, [])
+  const prod = getProduction(tiles)
+  const rates = {
+    woodGain: prod.wood/60,
+    woodUse: game.campfire.lit?(time.phase==='day' ? 1/120: 1/30):0,
+    gasGain: prod.gas/60,
+    furGain: prod.fur/60,
+    mineralsGain: prod.minerals/60
+  }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGame(prev => {
+        const elapsedSec = prev.elapsedSec + 1
+        const next = handleDayNight(elapsedSec)
+
+        const result = moveTick(prev.res, tiles, prev.campfire, next.phase)
+        return {
+          elapsedSec,
+          res: result.resource,
+          campfire: result.campfire
+        }
+      })
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [])
   return (
     <section>
       <TopBar />
+      <button onClick={() => setGame(prev => ({
+        ...prev, elapsedSec:prev.elapsedSec+50}))}>
+        Burner Button, Forward 50 seconds
+      </button>
       <div>
         <p>Phase: {time.phase}</p>
         <p>Time remaining: {time.remaining} (seconds)</p>
@@ -50,7 +63,8 @@ useEffect(()=>{
         wood={game.res.wood}
         gas={game.res.gas}
         fur={game.res.fur}
-        minerals={game.res.minerals} />
+        minerals={game.res.minerals}
+        rates={rates} />
       <section>
         <GameGrid tiles={startingTiles} />
       </section>

@@ -8,12 +8,33 @@
 .res{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    padding: 12px;
-    background-color: bisque;
-    border: 2px solid rgb(114, 168, 59);
+    align-items: stretch;
+    gap: 12px;
+    padding: 18px 24px;
+    background-color: #cfbea0;
+    border: 3px solid rgb(114, 168, 59);
     border-radius: 10px;
     color: #26351f;
+    box-shadow: 0 5px 0 #58381f;
     min-width: 70px;
+}
+.resource{
+    text-align: left;
+    padding-bottom: 8px;
+    border-bottom: 2px dased #85ad72;
+}
+.resource div{
+    display: flex;
+    justify-content: space-between;
+    gap:20px;
+    font-size:15px;
+    font-weight: 700;
+}
+.resRate{
+    display: block;
+    font-size: 11px;
+    color: #426b32;
+    margin: 4px;
+    font-weight: 600;
+    color: #426b32
 }
