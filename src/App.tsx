@@ -19,7 +19,7 @@ interface game {
 function App() {
   const [game, setGame] = useState<game>({
     elapsedSec: 0,
-    res: { wood: 10, gas: 0, fur: 0, minerals: 0 },
+    res: { wood: 0, gas: 0, fur: 0, minerals: 0 },
     campfire: { lit: true, elapsed: 0, grace: 0, tier: 'small', style: 'default' }
   })
   const time = handleDayNight(game.elapsedSec)
@@ -58,6 +58,11 @@ function App() {
       <div>
         <p>Phase: {time.phase}</p>
         <p>Time remaining: {time.remaining} (seconds)</p>
+      </div>
+      <div>
+        <p>Campfire: {game.campfire.lit ? 'Lit': 'Out'}</p>
+        <p>GracePeriod: {game.campfire.grace}/30 seconds</p>
+        <p>Fuel timer: {game.campfire.elapsed} seconds</p>
       </div>
       <ResBar
         wood={game.res.wood}

@@ -9,8 +9,12 @@ interface campfireTick {
 }
 
 function campfireTick(campfire: campfireStatus, res: resourceCarrier, phase: phase): campfireTick {
-    if (!campfire.lit)
-        return { campfire, resources: res }
+    if (!campfire.lit){
+        if(res.wood>=1){
+            return{campfire:{...campfire, lit: true, elapsed: 0, grace:0}, resources:res}
+        }
+        return {campfire,resources:res}
+    }
     const fuelInt = phase === 'day' ? dayFuel : nightFuel
 
     if (res.wood < 1) {

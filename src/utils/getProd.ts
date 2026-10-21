@@ -21,10 +21,10 @@ export interface resourceCarrier{
 
 function getProduction(tiles: Tile[]): resourceCarrier{
     return{
-        wood: resPerMin(tiles, 'valley', 1),
-        gas: resPerMin(tiles, 'earth', 0.2),
-        minerals: resPerMin(tiles, 'minerals', 0.2),
-        fur: resPerMin(tiles,'valley',0.5)
+        wood: resPerMin(tiles, 'valley', 0.5),
+        gas: resPerMin(tiles, 'earth', 0.05),
+        minerals: resPerMin(tiles, 'minerals', 0.05),
+        fur: resPerMin(tiles,'valley',0.2)
     }
 }
 
