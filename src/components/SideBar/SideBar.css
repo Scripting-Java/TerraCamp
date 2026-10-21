@@ -1,0 +1,46 @@
+.sidebar{
+    position:fixed;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    padding:10px;
+    background: #cfbea0;
+    border: 3px solid rgb(114,168,59);
+    border-radius:14px;
+    box-shadow: 4px 4px 0 #58381f;
+    z-index: 100;
+}
+.sidebarButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:45px;
+    height:45px;
+    padding:0;
+    color: #26351f;
+    background: #ecd199;
+    border-radius: 9px;
+    transition:
+        background-color 150ms ease,
+        transform 150ms ease,
+        box-shadow 150ms ease;
+}
+
+.sidebarButton:hover{
+    background: #b8d49b;
+    transform: scale(1.1);
+    box-shadow: 2px 2px 0 #58381f;
+}
+
+.sidebarButton:active{
+    transform:scale(0.96);
+    box-shadow: none;
+}
+
+.sidebarButton:focus-visible{
+    outline: 3px solid #58381f;
+    outline-offset: 3px;
+}

@@ -6,6 +6,7 @@ import moveTick from './utils/gameTick'
 import type { campfireStatus } from './utils/campFire/campfire'
 import { handleDayNight } from './utils/Phase/dayNightCycle'
 import getProduction from './utils/getProd'
+import SideBar from './components/SideBar/SideBar'
 
 import { useState, useEffect } from 'react'
 import './App.css'
@@ -51,6 +52,7 @@ function App() {
   return (
     <section>
       <TopBar />
+      <SideBar />
       <button onClick={() => setGame(prev => ({
         ...prev, elapsedSec:prev.elapsedSec+50}))}>
         Burner Button, Forward 50 seconds
