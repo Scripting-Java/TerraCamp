@@ -1,10 +1,14 @@
-import { Info, ShoppingBag, Settings, Sidebar } from "lucide-react";
+import { Info, ShoppingBag, Settings, } from "lucide-react";
 import './SideBar.css'
 
-function SideBar() {
+interface sidebar{
+    onInfo: ()=>void
+}
+
+function SideBar({onInfo}: sidebar) {
     return (
         <nav className="sidebar">
-            <button className="sidebarButton">
+            <button className="sidebarButton" onClick={onInfo}>
                 <Info size={22} />
             </button>
             <button className="sidebarButton">

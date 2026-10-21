@@ -1,5 +1,4 @@
 import TopBar from './components/TopBar/TopBar'
-import ResBar from './components/ResBar/ResBar'
 import GameGrid from './components/GameGrid/GameGrid'
 import getStartingTiles from './utils/getStartingTiles'
 import moveTick from './utils/gameTick'
@@ -7,6 +6,7 @@ import type { campfireStatus } from './utils/campFire/campfire'
 import { handleDayNight } from './utils/Phase/dayNightCycle'
 import getProduction from './utils/getProd'
 import SideBar from './components/SideBar/SideBar'
+import InfoToggle from './components/InfoToggle/InfoToggle'
 
 import { useState, useEffect } from 'react'
 import './App.css'
@@ -23,6 +23,7 @@ function App() {
     res: { wood: 0, gas: 0, fur: 0, minerals: 0 },
     campfire: { lit: true, elapsed: 0, grace: 0, tier: 'small', style: 'default' }
   })
+  const [info,setInfo] = useState(false)
   const time = handleDayNight(game.elapsedSec)
   const tiles = startingTiles
   const prod = getProduction(tiles)
@@ -52,7 +53,10 @@ function App() {
   return (
     <section>
       <TopBar />
-      <SideBar />
+      <SideBar onInfo={()=>setInfo(prev=>!prev)} />
+        {info && (
+          <InfoToggle onClose={()=>setInfo(false)} wood={game.res.wood} gas={game.res.gas} fur={game.res.fur} minerals={game.res.minerals} rates={rates} />
+        )}
       <button onClick={() => setGame(prev => ({
         ...prev, elapsedSec:prev.elapsedSec+50}))}>
         Burner Button, Forward 50 seconds
@@ -66,12 +70,6 @@ function App() {
         <p>GracePeriod: {game.campfire.grace}/30 seconds</p>
         <p>Fuel timer: {game.campfire.elapsed} seconds</p>
       </div>
-      <ResBar
-        wood={game.res.wood}
-        gas={game.res.gas}
-        fur={game.res.fur}
-        minerals={game.res.minerals}
-        rates={rates} />
       <section>
         <GameGrid tiles={startingTiles} />
       </section>
