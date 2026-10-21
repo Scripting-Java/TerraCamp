@@ -2,7 +2,6 @@ import ResBar from "../ResBar/ResBar";
 import './InfoToggle.css'
 
 interface InfoToggle{
-    onClose:() => void,
     wood: number,
     gas:number,
     fur: number,
@@ -19,9 +18,6 @@ interface InfoToggle{
 function InfoToggle(toggle: InfoToggle){
     return(
         <section className="infoToggle">
-            <button className="infobutton" onClick={toggle.onClose}>
-                X
-            </button>
             <ResBar wood={toggle.wood}gas={toggle.gas}fur={toggle.fur}minerals={toggle.minerals}rates={toggle.rates}/>
         </section>
     )

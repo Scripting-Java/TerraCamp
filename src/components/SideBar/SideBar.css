@@ -39,6 +39,11 @@
     transform:scale(0.96);
     box-shadow: none;
 }
+.sidebarButton.active{
+    background: #b8d49b;
+    border-color: #426b32;
+    box-shadow:  0 0 0 2px #85ad72;
+}
 
 .sidebarButton:focus-visible{
     outline: 3px solid #58381f;

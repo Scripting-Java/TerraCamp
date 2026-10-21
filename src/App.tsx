@@ -53,9 +53,9 @@ function App() {
   return (
     <section>
       <TopBar />
-      <SideBar onInfo={()=>setInfo(prev=>!prev)} />
+      <SideBar onInfo={()=>setInfo(prev=>!prev)} infoOpen={info} />
         {info && (
-          <InfoToggle onClose={()=>setInfo(false)} wood={game.res.wood} gas={game.res.gas} fur={game.res.fur} minerals={game.res.minerals} rates={rates} />
+          <InfoToggle wood={game.res.wood} gas={game.res.gas} fur={game.res.fur} minerals={game.res.minerals} rates={rates} />
         )}
       <button onClick={() => setGame(prev => ({
         ...prev, elapsedSec:prev.elapsedSec+50}))}>
