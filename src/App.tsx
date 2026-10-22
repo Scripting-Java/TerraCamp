@@ -72,7 +72,7 @@ function App() {
         <p>Fuel timer: {game.campfire.elapsed} seconds</p>
       </div>
       <section>
-        <GameGrid tiles={startingTiles} />
+        <GameGrid tiles={startingTiles} isCampfireLit={game.campfire.lit}/>
       </section>
     </section>
   )

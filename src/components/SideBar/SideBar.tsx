@@ -9,18 +9,18 @@ interface sidebar {
 function SideBar({ onInfo, infoOpen }: sidebar) {
     return (
         <nav className="sidebar">
-            <div className="tooltip" data-tooltip="Resource Info">
-                <button className={`sidebarButton ${infoOpen ? 'active' : ''}`} onClick={onInfo} title="Resource Info">
+            <div className="tooltip" data-tooltip="Resources">
+                <button className={`sidebarButton ${infoOpen ? 'active' : ''}`} onClick={onInfo}>
                     <Info size={22} />
                 </button>
             </div>
             <div className="tooltip" data-tooltip="Shop">
-            <button className="sidebarButton" title="Shop For Upgrades">
+            <button className="sidebarButton">
                 <ShoppingBag size={22} />
             </button>
             </div>
             <div className="tooltip" data-tooltip="Settings">
-            <button className="sidebarButton" title="Settings">
+            <button className="sidebarButton">
                 <Settings size={22} />
             </button>
             </div>
