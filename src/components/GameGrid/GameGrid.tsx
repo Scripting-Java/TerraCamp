@@ -3,6 +3,7 @@ import type { Tile } from '../../types/game'
 import valleyTile from '../../assets/ValleyTile.png'
 import campfireLit from '../../assets/CampFire.png'
 import campfireunLit from '../../assets/UnlitCampFire.png'
+import earthTile from '../../assets/EarthTile.png'
 interface GameGrid {
     tiles: Tile[],
     isCampfireLit:boolean
@@ -14,15 +15,12 @@ function GameGrid({ tiles, isCampfireLit }: GameGrid) {
             {tiles.map((tile) => {
                 let tileImg: string | null = null
                 let tileCont = ''
-                if (tile.type === 'campfire'){
-                    tileCont = 'Fire goes here'
+                if (tile.type === 'campfire')
                     tileImg = isCampfireLit? campfireLit: campfireunLit
-                }else if (tile.type === 'valley'){
-                    tileCont = 'Valley goes here'
+                else if (tile.type === 'valley')
                     tileImg = valleyTile
-                }
                 else if (tile.type === 'earth')
-                    tileCont = 'Gas production goes here'
+                    tileImg = earthTile
                 else if (tile.type === 'gem')
                     tileCont = 'Gem goes here'
                 else if (tile.type === 'minerals')
