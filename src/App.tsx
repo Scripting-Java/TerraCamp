@@ -59,8 +59,8 @@ function App() {
           <InfoToggle wood={game.res.wood} gas={game.res.gas} fur={game.res.fur} minerals={game.res.minerals} rates={rates} pos={infoPos} setPos={setInfoPos}/>
         )}
       <button onClick={() => setGame(prev => ({
-        ...prev, elapsedSec:prev.elapsedSec+50}))}>
-        Burner Button, Forward 50 seconds
+        ...prev, elapsedSec:prev.elapsedSec+50, res:{...prev.res, wood:0}}))}>
+        Burner Button, Forward 50 seconds, sets wood to zero
       </button>
       <div>
         <p>Phase: {time.phase}</p>
