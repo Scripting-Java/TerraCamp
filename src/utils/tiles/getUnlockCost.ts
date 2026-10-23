@@ -1,4 +1,3 @@
-import type { Tile } from "../../types/game";
 import type { resourceCarrier } from "../getProd";
 function getDist(x:number,y:number): number{
     return Math.abs(x)+Math.abs(y)
