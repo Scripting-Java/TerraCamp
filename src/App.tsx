@@ -2,6 +2,7 @@ import TopBar from './components/TopBar/TopBar'
 import GameGrid from './components/GameGrid/GameGrid'
 import type { Tile } from './types/game'
 import unlock from './utils/tiles/unlock'
+import getVisible from './utils/tiles/getVisible'
 import moveTick from './utils/gameTick'
 import type { campfireStatus } from './utils/campFire/campfire'
 import { handleDayNight } from './utils/Phase/dayNightCycle'
@@ -74,7 +75,7 @@ function App() {
         <p>Fuel timer: {game.campfire.elapsed} seconds</p>
       </div>
       <section>
-        <GameGrid tiles={tiles} isCampfireLit={game.campfire.lit}/>
+        <GameGrid tiles={getVisible(tiles)} isCampfireLit={game.campfire.lit}/>
       </section>
     </section>
   )

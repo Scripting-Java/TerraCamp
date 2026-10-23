@@ -33,7 +33,7 @@ function GameGrid({ tiles, isCampfireLit }: GameGrid) {
                 else if (tile.type === 'locked')
                     tileCont = 'This tile is locked'
                 return (
-                        <div className='tile' key={tile.id}>
+                        <div className='tile' key={tile.id} style={{gridColumn:tile.x+6, gridRow:tile.y+6}}>
                             {tileImg ? (<img src={tileImg} />) : (tile.type)}
                         </div>
                 )
