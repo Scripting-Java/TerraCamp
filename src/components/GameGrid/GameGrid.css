@@ -1,6 +1,6 @@
 .campfire{
   display: grid;
-  grid-template-columns: repeat(3,300px);
+  grid-template-columns: repeat(11,100px);
   gap: 6px;
   justify-content: center;
 }

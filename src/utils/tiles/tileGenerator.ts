@@ -18,6 +18,8 @@ function build(): Tile[] {
             const starting = start.find(tile=>tile.x===x&&tile.y===y)
             if(baseCamp && starting)
                 type=starting.type
+            if(x===0&&y===0)
+                type="campfire"
             if((x===-5&&y===-5)||(x===5&&y===-5)||(x===-5&&y===5)||(x===5&&y===5))
                 type="gem"
             if((x===-3&& y===-3)||(x===3&& y===-3)||(x===-3&&y===3)||(x===3&&y===3))
