@@ -2,7 +2,7 @@ import type { Tile } from "../types/game";
 function getNumTiles(tiles: Tile[], type: Tile['type']): number {
     let count = 0
     for(const tile of tiles){
-        if(tile.type === type)
+        if(tile.type === type && tile.unlocked)
             count++
     }
     return count

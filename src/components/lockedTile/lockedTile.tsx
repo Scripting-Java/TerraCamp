@@ -17,10 +17,18 @@ function lockedTile({ tile, unlock, currentRes }: lockedTile) {
             <img src={locked} />
             <div className="locktooltip">
                 <h4>Unlock:</h4>
-                <p>Wood: {formatRes(currentRes.wood)}/{(formatRes(tile.cost?.wood ?? 0))}</p>
-                <p>Fur: {formatRes(currentRes.fur)}/{(formatRes(tile.cost?.fur ?? 0))}</p>
-                <p>Gas: {formatRes(currentRes.gas)}/{(formatRes(tile.cost?.gas ?? 0))}</p>
-                <p>Minerals: {formatRes(currentRes.minerals)}/{(formatRes(tile.cost?.minerals ?? 0))}</p>
+                {(tile.cost?.wood ?? 0) > 0 && (
+                    <p>Wood: {formatRes(currentRes.wood)}/{(formatRes(tile.cost?.wood ?? 0))}</p>
+                )}
+                {(tile.cost?.fur ?? 0) > 0 && (
+                    <p>Fur: {formatRes(currentRes.fur)}/{(formatRes(tile.cost?.fur ?? 0))}</p>
+                )}
+                {(tile.cost?.gas ?? 0) > 0 && (
+                    <p>Gas: {formatRes(currentRes.gas)}/{(formatRes(tile.cost?.gas ?? 0))}</p>
+                )}
+                {(tile.cost?.minerals ?? 0) > 0 && (
+                    <p>Minerals: {formatRes(currentRes.minerals)}/{(formatRes(tile.cost?.minerals ?? 0))}</p>
+                )}
                 <button onClick={unlock}>
                     Unlock
                 </button>
