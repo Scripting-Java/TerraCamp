@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(11,100px);
   gap: 6px;
-  justify-content: center;
+  justify-content: start;
 }
 
 .tile{
