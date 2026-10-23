@@ -65,6 +65,9 @@ function App() {
         ...prev, elapsedSec:prev.elapsedSec+50, res:{...prev.res, wood:0}}))}>
         Burner Button, Forward 50 seconds, sets wood to zero
       </button>
+      <button onClick={()=>setGame(prev=>({...prev, campfire: {...prev.campfire,lit:false,elapsed:0,grace:0}}))}>
+        Burner Button 2(test unlocks)
+      </button>
       <div>
         <p>Phase: {time.phase}</p>
         <p>Time remaining: {time.remaining} (seconds)</p>
@@ -76,6 +79,8 @@ function App() {
       </div>
       <section>
         <GameGrid tiles={getVisible(tiles)} currentRes={game.res} isCampfireLit={game.campfire.lit} handleTile={(id)=> {
+          if(!game.campfire.lit)
+            return
           const newTiles = unlock(tiles,id,game.res)
           if(newTiles){
             setTiles(newTiles.tiles)

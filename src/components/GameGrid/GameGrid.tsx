@@ -37,7 +37,7 @@ function GameGrid({ tiles, isCampfireLit, handleTile, currentRes }: GameGrid) {
                 return (
                     <div className='tile' key={tile.id} style={{ gridColumn: tile.x + 6, gridRow: tile.y + 6 }}>
                         {tile.unlocked?(tileImg?(<img src={tileImg}/>): (tileCont)):(
-                            <LockedTile tile={tile} currentRes={currentRes} unlock={()=>handleTile(tile.id)}/>
+                            <LockedTile tile={tile} currentRes={currentRes} unlock={()=>handleTile(tile.id)} isLit={isCampfireLit} />
                         )
                     }
                     </div>

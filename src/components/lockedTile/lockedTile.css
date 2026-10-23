@@ -39,3 +39,24 @@
 .locktooltip button:hover{
     background: #91a66b;
 }
+
+.fireIsOutSoNoUnlock{
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left:50%;
+    transform: translateX(-50%);
+    width: 130px;
+    font-size: 14px;
+    padding: 10px;
+    color: rgb(255, 142, 142);
+    font-weight: 400;
+    background: #435501;
+    border: 2px solid;
+    border-radius: 12px;
+    font-family: 'Aboreto', serif;
+}
+
+.locked:hover .fireIsOutSoNoUnlock{
+    display: block;
+}
