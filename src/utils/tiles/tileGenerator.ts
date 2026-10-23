@@ -1,6 +1,6 @@
 import type { Tile } from "../../types/game";
 import getStartingTiles from "./getStartingTiles";
-
+import calcCost from "./getUnlockCost";
 function generateTiles(): Tile['type'] {
     const num = Math.random()
     if (num < 0.8) return 'valley'
@@ -16,8 +16,6 @@ function build(): Tile[] {
             const baseCamp = x >= -1 && x <= 1 && y >= -1 && y <= 1
             let type: Tile["type"] = generateTiles()
             const starting = start.find(tile => tile.x === x && tile.y === y)
-            if(!baseCamp||starting)
-                type = 'locked'
             if (baseCamp && starting)
                 type = starting.type
             if (x === 0 && y === 0)
@@ -28,7 +26,8 @@ function build(): Tile[] {
                 type = 'obelisk'
             if ((x === -1 && y === 0)||(x === 1 && y === 0)||(x === 0 && y === 1)||(x === 0 && y === -1))
                 type = 'gemReceiver'
-            tiles.push({ id: id++, x, y, type, unlocked: baseCamp })
+            const cost = calcCost(x,y)
+            tiles.push({ id: id++, x, y, type, unlocked: baseCamp, cost:cost })
         }
     }
     return tiles
