@@ -5,14 +5,16 @@ import campfireLit from '../../assets/CampFire.png'
 import campfireunLit from '../../assets/UnlitCampFire.png'
 import earthTile from '../../assets/EarthTile.png'
 import gemReceiverTile from '../../assets/GemTile.png'
-import locked from '../../assets/LockedTile.png'
+import type { resourceCarrier } from '../../utils/getProd'
+import LockedTile from "../lockedTile/lockedTile"
 interface GameGrid {
     tiles: Tile[],
     isCampfireLit: boolean,
-    handleTile: (id: number) => void
+    handleTile: (id: number) => void,
+    currentRes: resourceCarrier
 }
 
-function GameGrid({ tiles, isCampfireLit, handleTile }: GameGrid) {
+function GameGrid({ tiles, isCampfireLit, handleTile, currentRes }: GameGrid) {
     return (
         <section className='campfire'>
             {tiles.map((tile) => {
@@ -20,8 +22,6 @@ function GameGrid({ tiles, isCampfireLit, handleTile }: GameGrid) {
                 let tileCont = ''
                 if (tile.type === 'campfire')
                     tileImg = isCampfireLit ? campfireLit : campfireunLit
-                else if (!tile.unlocked)
-                    tileImg = locked
                 else if (tile.type === 'valley')
                     tileImg = valleyTile
                 else if (tile.type === 'earth')
@@ -35,8 +35,11 @@ function GameGrid({ tiles, isCampfireLit, handleTile }: GameGrid) {
                 else if (tile.type === 'obelisk')
                     tileCont = 'obelisk goes here'
                 return (
-                    <div className='tile' key={tile.id} style={{ gridColumn: tile.x + 6, gridRow: tile.y + 6 }} onClick={() => handleTile(tile.id)}>
-                        {tileImg ? <img src={tileImg} /> : (tileCont)}
+                    <div className='tile' key={tile.id} style={{ gridColumn: tile.x + 6, gridRow: tile.y + 6 }}>
+                        {tile.unlocked?(tileImg?(<img src={tileImg}/>): (tileCont)):(
+                            <LockedTile tile={tile} currentRes={currentRes} unlock={()=>handleTile(tile.id)}/>
+                        )
+                    }
                     </div>
                 )
             })}

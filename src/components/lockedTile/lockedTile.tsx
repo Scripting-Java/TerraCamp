@@ -15,7 +15,7 @@ function lockedTile({ tile, unlock, currentRes }: lockedTile) {
     return (
         <div className="locked">
             <img src={locked} />
-            <div className="tooltip">
+            <div className="locktooltip">
                 <h4>Unlock:</h4>
                 <p>Wood: {formatRes(currentRes.wood)}/{(formatRes(tile.cost?.wood ?? 0))}</p>
                 <p>Fur: {formatRes(currentRes.fur)}/{(formatRes(tile.cost?.fur ?? 0))}</p>
@@ -28,3 +28,4 @@ function lockedTile({ tile, unlock, currentRes }: lockedTile) {
         </div>
     )
 }
+export default lockedTile

@@ -75,7 +75,7 @@ function App() {
         <p>Fuel timer: {game.campfire.elapsed} seconds</p>
       </div>
       <section>
-        <GameGrid tiles={getVisible(tiles)} isCampfireLit={game.campfire.lit} handleTile={(id)=> {
+        <GameGrid tiles={getVisible(tiles)} currentRes={game.res} isCampfireLit={game.campfire.lit} handleTile={(id)=> {
           const newTiles = unlock(tiles,id,game.res)
           if(newTiles){
             setTiles(newTiles.tiles)
