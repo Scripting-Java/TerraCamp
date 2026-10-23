@@ -1,0 +1,31 @@
+import type { Tile } from "../../types/game";
+import getStartingTiles from "./getStartingTiles";
+
+function generateTiles(): Tile['type'] {
+    const num = Math.random()
+    if (num < 0.8) return 'valley'
+    if (num < 0.9) return 'earth'
+    return 'minerals'
+}
+function build(): Tile[] {
+    const tiles: Tile[] = []
+    const start = getStartingTiles()
+    let id = 0
+    for(let y = -5; y<=5; y++){
+        for(let x = -5; x<=5; x++){
+            const baseCamp = x>=-1 && x<=1 && y>=-1 && y<=1
+            let type: Tile["type"] = generateTiles()
+            const starting = start.find(tile=>tile.x===x&&tile.y===y)
+            if(baseCamp && starting)
+                type=starting.type
+            if((x===-5&&y===-5)||(x===5&&y===-5)||(x===-5&&y===5)||(x===5&&y===5))
+                type="gem"
+            if((x===-3&& y===-3)||(x===3&& y===-3)||(x===-3&&y===3)||(x===3&&y===3))
+                type = 'obelisk'
+            tiles.push({id:id++,x,y,type,unlocked:baseCamp})
+        }
+    }
+    return tiles
+}
+
+export default build

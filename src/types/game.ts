@@ -1,6 +1,9 @@
-export type Tiles = 'campfire'| 'valley'| 'earth'| 'minerals'| 'obelisk'| 'gem'
+export type Tiles = 'campfire'| 'valley'| 'earth'| 'minerals'| 'obelisk'| 'gem'| 'locked'
 
 export interface Tile{
     id: number,
-    type: Tiles
+    type: Tiles,
+    x: number,
+    y: number,
+    unlocked: boolean
 }

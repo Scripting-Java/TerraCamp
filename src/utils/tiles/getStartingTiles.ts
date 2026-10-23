@@ -1,4 +1,4 @@
-import type { Tile } from "../types/game"
+import type { Tile } from "../../types/game";
 function getStartingTiles(): Tile[]{
     const tiles: Tile[] = []
     let earthGiven: boolean = false;
@@ -24,7 +24,7 @@ function getStartingTiles(): Tile[]{
         if(i===8 && !earthGiven){
             tileType = 'earth'
         }
-        tiles.push({id:i, type: tileType})
+        tiles.push({id:i, type: tileType, x: (i%3)-1, y: Math.floor(i/3)-1, unlocked:true})
     }
     return tiles
 }

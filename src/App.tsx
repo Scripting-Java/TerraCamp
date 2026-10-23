@@ -1,17 +1,19 @@
 import TopBar from './components/TopBar/TopBar'
 import GameGrid from './components/GameGrid/GameGrid'
-import getStartingTiles from './utils/getStartingTiles'
+import type { Tile } from './types/game'
+import unlock from './utils/tiles/unlock'
 import moveTick from './utils/gameTick'
 import type { campfireStatus } from './utils/campFire/campfire'
 import { handleDayNight } from './utils/Phase/dayNightCycle'
 import getProduction from './utils/getProd'
 import SideBar from './components/SideBar/SideBar'
 import InfoToggle from './components/InfoToggle/InfoToggle'
+import build from './utils/tiles/tileGenerator'
 
 import { useState, useEffect } from 'react'
 import './App.css'
 
-const startingTiles = getStartingTiles()
+
 interface game {
   elapsedSec: number,
   res: { wood: number, gas: number, fur: number, minerals: number }
@@ -25,7 +27,7 @@ function App() {
   })
   const [info,setInfo] = useState(false)
   const time = handleDayNight(game.elapsedSec)
-  const tiles = startingTiles
+  const [tiles, setTiles] = useState<Tile[]>(()=>build())
   const prod = getProduction(tiles)
   const rates = {
     woodGain: prod.wood/60,
@@ -72,7 +74,7 @@ function App() {
         <p>Fuel timer: {game.campfire.elapsed} seconds</p>
       </div>
       <section>
-        <GameGrid tiles={startingTiles} isCampfireLit={game.campfire.lit}/>
+        <GameGrid tiles={tiles} isCampfireLit={game.campfire.lit}/>
       </section>
     </section>
   )

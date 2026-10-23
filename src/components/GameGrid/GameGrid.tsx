@@ -28,6 +28,8 @@ function GameGrid({ tiles, isCampfireLit }: GameGrid) {
                     tileCont = 'Mineral goes here'
                 else if (tile.type === 'obelisk')
                     tileCont = 'obelisk goes here'
+                else if (tile.type === 'locked')
+                    tileCont = 'This tile is locked'
 
                 return (
                     <div className='tile' key={tile.id}>
