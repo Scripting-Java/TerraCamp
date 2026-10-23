@@ -37,15 +37,6 @@ function GameGrid({ tiles, isCampfireLit, handleTile }: GameGrid) {
                 return (
                     <div className='tile' key={tile.id} style={{ gridColumn: tile.x + 6, gridRow: tile.y + 6 }} onClick={() => handleTile(tile.id)}>
                         {tileImg ? <img src={tileImg} /> : (tileCont)}
-                        {!tile.unlocked && (
-                            <button onClick={(e) => {
-                                e.stopPropagation()
-                                handleTile(tile.id)
-                            }}>
-                                Unlock
-                            </button>
-                        )
-                        }
                     </div>
                 )
             })}
