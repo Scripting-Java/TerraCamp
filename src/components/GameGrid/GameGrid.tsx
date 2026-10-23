@@ -5,6 +5,7 @@ import campfireLit from '../../assets/CampFire.png'
 import campfireunLit from '../../assets/UnlitCampFire.png'
 import earthTile from '../../assets/EarthTile.png'
 import gemReceiverTile from '../../assets/GemTile.png'
+import locked from '../../assets/LockedTile.png'
 interface GameGrid {
     tiles: Tile[],
     isCampfireLit: boolean,
@@ -19,6 +20,8 @@ function GameGrid({ tiles, isCampfireLit, handleTile }: GameGrid) {
                 let tileCont = ''
                 if (tile.type === 'campfire')
                     tileImg = isCampfireLit ? campfireLit : campfireunLit
+                else if (!tile.unlocked)
+                    tileImg = locked
                 else if (tile.type === 'valley')
                     tileImg = valleyTile
                 else if (tile.type === 'earth')
@@ -31,11 +34,9 @@ function GameGrid({ tiles, isCampfireLit, handleTile }: GameGrid) {
                     tileCont = 'Mineral goes here'
                 else if (tile.type === 'obelisk')
                     tileCont = 'obelisk goes here'
-                else if (tile.type === 'locked')
-                    tileCont = 'This tile is locked'
                 return (
                         <div className='tile' key={tile.id} style={{gridColumn:tile.x+6, gridRow:tile.y+6}} onClick={()=>handleTile(tile.id)}>
-                            {tile.unlocked ? tileImg? (<img src={tileImg} />) : (tileCont||tile.type): 'This tile is locked'}
+                            {tileImg ? <img src={tileImg}/> : (tileCont)}
                         </div>
                 )
             })}
