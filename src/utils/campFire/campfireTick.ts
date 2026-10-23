@@ -11,7 +11,7 @@ interface campfireTick {
 function campfireTick(campfire: campfireStatus, res: resourceCarrier, phase: phase): campfireTick {
     if (!campfire.lit){
         if(res.wood>=1){
-            return{campfire:{...campfire, lit: true, elapsed: 0, grace:0}, resources:res}
+            return{campfire:{...campfire, lit: true, elapsed: 0, grace:0}, resources:{...res, wood:res.wood-1}}
         }
         return {campfire,resources:res}
     }
