@@ -16,6 +16,8 @@ function build(): Tile[] {
             const baseCamp = x >= -1 && x <= 1 && y >= -1 && y <= 1
             let type: Tile["type"] = generateTiles()
             const starting = start.find(tile => tile.x === x && tile.y === y)
+            if(!baseCamp||starting)
+                type = 'locked'
             if (baseCamp && starting)
                 type = starting.type
             if (x === 0 && y === 0)

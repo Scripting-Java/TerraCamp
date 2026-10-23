@@ -7,10 +7,11 @@ import earthTile from '../../assets/EarthTile.png'
 import gemReceiverTile from '../../assets/GemTile.png'
 interface GameGrid {
     tiles: Tile[],
-    isCampfireLit: boolean
+    isCampfireLit: boolean,
+    handleTile: (id: number)=>void
 }
 
-function GameGrid({ tiles, isCampfireLit }: GameGrid) {
+function GameGrid({ tiles, isCampfireLit, handleTile }: GameGrid) {
     return (
         <section className='campfire'>
             {tiles.map((tile) => {
@@ -33,7 +34,7 @@ function GameGrid({ tiles, isCampfireLit }: GameGrid) {
                 else if (tile.type === 'locked')
                     tileCont = 'This tile is locked'
                 return (
-                        <div className='tile' key={tile.id} style={{gridColumn:tile.x+6, gridRow:tile.y+6}}>
+                        <div className='tile' key={tile.id} style={{gridColumn:tile.x+6, gridRow:tile.y+6}} onClick={()=>handleTile(tile.id)}>
                             {tileImg ? (<img src={tileImg} />) : (tile.type)}
                         </div>
                 )
