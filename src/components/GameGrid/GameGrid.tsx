@@ -9,7 +9,7 @@ import locked from '../../assets/LockedTile.png'
 interface GameGrid {
     tiles: Tile[],
     isCampfireLit: boolean,
-    handleTile: (id: number)=>void
+    handleTile: (id: number) => void
 }
 
 function GameGrid({ tiles, isCampfireLit, handleTile }: GameGrid) {
@@ -35,12 +35,21 @@ function GameGrid({ tiles, isCampfireLit, handleTile }: GameGrid) {
                 else if (tile.type === 'obelisk')
                     tileCont = 'obelisk goes here'
                 return (
-                        <div className='tile' key={tile.id} style={{gridColumn:tile.x+6, gridRow:tile.y+6}} onClick={()=>handleTile(tile.id)}>
-                            {tileImg ? <img src={tileImg}/> : (tileCont)}
-                        </div>
+                    <div className='tile' key={tile.id} style={{ gridColumn: tile.x + 6, gridRow: tile.y + 6 }} onClick={() => handleTile(tile.id)}>
+                        {tileImg ? <img src={tileImg} /> : (tileCont)}
+                        {!tile.unlocked && (
+                            <button onClick={(e) => {
+                                e.stopPropagation()
+                                handleTile(tile.id)
+                            }}>
+                                Unlock
+                            </button>
+                        )
+                        }
+                    </div>
                 )
             })}
-        </section>
+        </section >
     )
 }
 export default GameGrid
