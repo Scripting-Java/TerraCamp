@@ -7,7 +7,8 @@ export interface Tile{
     type: Tiles,
     x: number,
     y: number,
-    unlocked: boolean
-    cost?: resourceCarrier
-    gemType?: gemType
+    unlocked: boolean,
+    cost?: resourceCarrier,
+    gemType?: gemType,
+    recieverClaimed?: boolean
 }

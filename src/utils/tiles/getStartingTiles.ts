@@ -8,7 +8,7 @@ function getStartingTiles(): Tile[]{
         if(i===4)
             tileType = 'campfire'
         if(i===1 || i===3||i===5||i===7)
-            tileType = 'gem'
+            tileType = 'gemReceiver'
         else{
             let num = Math.random()
             if(num<0.8)
