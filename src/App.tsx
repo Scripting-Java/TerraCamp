@@ -13,6 +13,8 @@ import build from './utils/tiles/tileGenerator'
 import { starting } from './utils/shop/upgrades'
 import type { upgradeLevels } from './utils/shop/upgrades'
 import ShopToggle from './components/ShopToggle/shop'
+import { buyUpgrade } from './utils/shop/upgrades'
+import type { upgradeType } from './utils/shop/upgrades'
 
 import { useState, useEffect } from 'react'
 import './App.css'
@@ -43,6 +45,15 @@ function App() {
     mineralsGain: prod.minerals/60
   }
   const [infoPos, setInfoPos] = useState({x:100,y:200})
+  const [shopPos, setShopPos] = useState({x:100,y:100})
+
+  function handleUpgrade(type: upgradeType){
+    const result = buyUpgrade(type,levels,game.res.gas)
+    if(!result) return
+    setLevels(result.levels)
+    setGame(prev=>({...prev,res:{...prev.res,gas:result.gas}}))
+  }
+
   useEffect(() => {
     const interval = setInterval(() => {setGame(prev => {
         const elapsedSec = prev.elapsedSec + 1
@@ -57,7 +68,7 @@ function App() {
       <TopBar />
       <SideBar onInfo={()=>setInfo(prev=>!prev)} infoOpen={info} onShop={()=>setShop(prev=>!prev)} shopOpen={shop}/>
         {info && (<InfoToggle wood={game.res.wood} gas={game.res.gas} fur={game.res.fur} minerals={game.res.minerals} rates={rates} pos={infoPos} setPos={setInfoPos}/>)}
-        {shop && <ShopToggle/>}
+        {shop && <ShopToggle levels={levels} gas={game.res.gas} buy={handleUpgrade}/>}
       <button onClick={()=>setGame(prev=>({...prev, campfire: {...prev.campfire,lit:false,elapsed:0,grace:0}}))}>
         Burner Button 2(test unlocks)
       </button>

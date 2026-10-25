@@ -16,7 +16,7 @@ interface buyResult{
     levels:upgradeLevels,
     gas:number
 }
-function getUpgradeCost(type: upgradeType, level:number): number{
+export function getUpgradeCost(type: upgradeType, level:number): number{
     const upgrade = upgrades[type]
     if(level>=upgrade.max)
         return 0

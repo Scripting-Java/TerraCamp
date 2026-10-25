@@ -12,7 +12,14 @@
     padding: 16px;
     box-sizing:border-box;
     z-index: 10;
+    resize:both;
+    overflow: auto;
+    min-width: 280px;
+    min-height: 200px;
+    max-width: calc(100vw-120px);
+    max-height: calc(100vh-120px);
 }
+
 
 .shopUpgrades, .shopDecor{
     padding: 12px;
@@ -28,4 +35,30 @@
 
 .shopDecor{
     min-height: 140px;
+}
+
+.shopUpgrade{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap:12px;
+    padding:10px;
+    border-bottom: 1px solid #426b32;
+}
+
+.shopUpgrade p{
+    margin: 4px;
+    font-size: 14px;
+}
+
+.shopUpgrade button{
+    padding: 6px;
+    border: 1px solid #66844a;
+    border-radius: 6px;
+    background: #426b32;
+    color: #f4f0dc;
+}
+
+.shopUpgrade button:disabled{
+    opacity: 0.5;
 }
