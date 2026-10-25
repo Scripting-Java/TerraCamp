@@ -1,4 +1,6 @@
 import type { Tile } from "../types/game";
+import { getUpgradeBonus } from "./shop/upgrades";
+import type { upgradeLevels} from "./shop/upgrades";
 function getNumTiles(tiles: Tile[], type: Tile['type']): number {
     let count = 0
     for(const tile of tiles){
@@ -48,8 +50,7 @@ function whichGem(tiles:Tile[]): gemCarrier{
     }
     return{hasRed:hasRed, hasBlue:hasBlue,hasGreen:hasGreen,hasYellow:hasYellow}
 }
-
-function calcBoost(tiles:Tile[]): resourceCarrier{
+function calcBoost(tiles:Tile[], levels:upgradeLevels): resourceCarrier{
     let woodMult = 1
     let furMult = 1
     let gasMult = 1
@@ -78,6 +79,10 @@ function calcBoost(tiles:Tile[]): resourceCarrier{
     gasMult+=obTiles*0.1
     mineralsMult+=obTiles*0.1
     }
+    woodMult*=1+getUpgradeBonus('wood',levels.wood)
+    furMult*=1+getUpgradeBonus('fur',levels.fur)
+    gasMult*=1+getUpgradeBonus('gas',levels.gas)
+    mineralsMult*=1+getUpgradeBonus('minerals',levels.minerals)
     return{
         wood: resPerMin(tiles,'valley',0.5*woodMult),
         gas: resPerMin(tiles, 'earth', 0.05*gasMult),
@@ -86,9 +91,10 @@ function calcBoost(tiles:Tile[]): resourceCarrier{
     }
 }
 
-function getProduction(tiles: Tile[]): resourceCarrier{
-    if(hasBoost(tiles))
-        return calcBoost(tiles)
+function getProduction(tiles: Tile[], levels:upgradeLevels): resourceCarrier{
+    const hasUpgrades = Object.values(levels).some(level=>level>0)
+    if(hasBoost(tiles)||hasUpgrades)
+        return calcBoost(tiles, levels)
     return{
         wood: resPerMin(tiles, 'valley', 0.5),
         gas: resPerMin(tiles, 'earth', 0.05),

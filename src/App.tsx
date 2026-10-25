@@ -10,6 +10,8 @@ import getProduction from './utils/getProd'
 import SideBar from './components/SideBar/SideBar'
 import InfoToggle from './components/InfoToggle/InfoToggle'
 import build from './utils/tiles/tileGenerator'
+import { starting } from './utils/shop/upgrades'
+import type { upgradeLevels } from './utils/shop/upgrades'
 
 import { useState, useEffect } from 'react'
 import './App.css'
@@ -29,7 +31,8 @@ function App() {
   const [info,setInfo] = useState(false)
   const time = handleDayNight(game.elapsedSec)
   const [tiles, setTiles] = useState<Tile[]>(()=>build())
-  const prod = getProduction(tiles)
+  const [levels,setLevels] = useState<upgradeLevels>(starting)
+  const prod = getProduction(tiles, levels)
   const rates = {
     woodGain: prod.wood/60,
     woodUse: game.campfire.lit?(time.phase==='day' ? 1/120: 1/30):0,
