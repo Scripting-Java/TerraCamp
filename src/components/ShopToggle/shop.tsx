@@ -3,6 +3,7 @@ import type { upgradeType, upgradeLevels } from "../../utils/shop/upgrades"
 import { getUpgradeBonus, getUpgradeCost } from "../../utils/shop/upgrades"
 import formatRes from "../../utils/formatters/formatters"
 import { useRef } from "react"
+import { Move } from "lucide-react"
 
 
 interface Shop {
@@ -40,9 +41,12 @@ function ShopToggle({ levels, gas, buy, pos, setPos }: Shop) {
     function handleClickOff() { drag.current = null }
 
     return (
-        <section className="shopToggle" ref={panelReference} style>
+        <section className="shopToggle" ref={panelReference} style={{ left: `${pos.x}px`, top: `${pos.y}px` }}>
+            <div className="shopDrag" onPointerDown={handleClick} onPointerMove={handleMove} onPointerUp={handleClickOff}>
+                <Move size={18} />
+            </div>
+            <h3>Upgrades:</h3>
             <div className="shopUpgrades">
-                <h3>Upgrades:</h3>
 
                 {upgradeNames.map(({ type, name }) => {
                     const level = levels[type]

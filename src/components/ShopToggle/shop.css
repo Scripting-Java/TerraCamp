@@ -8,7 +8,7 @@
     border: 2px solid #426b32;
     border-radius: 12px;
     left:100px;
-    width: 420px;
+    width: 600px;
     padding: 16px;
     box-sizing:border-box;
     z-index: 10;
@@ -29,21 +29,55 @@
     border-radius: 8px;
 }
 
-.shopUpgrades{
-    min-height: 200px;
+.shopUpgrades {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: auto 1fr;
+    gap: 6px;
+    width: 550px;
+    height: 200px;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    background: #243b2d;
+    border: 1px solid #426b32;
+    border-radius: 8px;
+}
+.shopUpgrades >h3{
+    grid-column: 1;
+    margin:0
 }
 
-.shopDecor{
-    min-height: 140px;
+.shopDecor {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: auto 1fr;
+    gap: 6px;
+    width: 550px;
+    height: 200px;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    background: #243b2d;
+    border: 1px solid #426b32;
+    border-radius: 8px;
+}
+
+.shopDecor > h3 {
+    grid-column: 1 / -1;
+    margin: 0;
 }
 
 .shopUpgrade{
-    display:flex;
-    align-items:center;
-    justify-content: space-between;
-    gap:12px;
-    padding:10px;
-    border-bottom: 1px solid #426b32;
+    display:block;
+    padding: 4px;
+}
+.shopUpgrade details {
+    width: 100%;
+}
+
+.shopUpgrade summary {
+    font-size: 13px;
 }
 
 .shopUpgrade p{
@@ -61,4 +95,12 @@
 
 .shopUpgrade button:disabled{
     opacity: 0.5;
+}
+.shopDrag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 6px 8px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #426b32;
 }

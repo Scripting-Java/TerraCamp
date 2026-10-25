@@ -68,7 +68,7 @@ function App() {
       <TopBar />
       <SideBar onInfo={()=>setInfo(prev=>!prev)} infoOpen={info} onShop={()=>setShop(prev=>!prev)} shopOpen={shop}/>
         {info && (<InfoToggle wood={game.res.wood} gas={game.res.gas} fur={game.res.fur} minerals={game.res.minerals} rates={rates} pos={infoPos} setPos={setInfoPos}/>)}
-        {shop && <ShopToggle levels={levels} gas={game.res.gas} buy={handleUpgrade}/>}
+        {shop && <ShopToggle levels={levels} gas={game.res.gas} buy={handleUpgrade} pos={shopPos} setPos={setShopPos}/>}
       <button onClick={()=>setGame(prev=>({...prev, campfire: {...prev.campfire,lit:false,elapsed:0,grace:0}}))}>
         Burner Button 2(test unlocks)
       </button>
