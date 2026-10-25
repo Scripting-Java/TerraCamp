@@ -12,6 +12,7 @@ import InfoToggle from './components/InfoToggle/InfoToggle'
 import build from './utils/tiles/tileGenerator'
 import { starting } from './utils/shop/upgrades'
 import type { upgradeLevels } from './utils/shop/upgrades'
+import ShopToggle from './components/ShopToggle/shop'
 
 import { useState, useEffect } from 'react'
 import './App.css'
@@ -29,6 +30,7 @@ function App() {
     campfire: { lit: true, elapsed: 0, grace: 0, tier: 'small', style: 'default' }
   })
   const [info,setInfo] = useState(false)
+  const [shop,setShop]=useState(false)
   const time = handleDayNight(game.elapsedSec)
   const [tiles, setTiles] = useState<Tile[]>(()=>build())
   const [levels,setLevels] = useState<upgradeLevels>(starting)
@@ -45,18 +47,17 @@ function App() {
     const interval = setInterval(() => {setGame(prev => {
         const elapsedSec = prev.elapsedSec + 1
         const next = handleDayNight(elapsedSec)
-        const result = moveTick(prev.res, tiles, prev.campfire, next.phase)
+        const result = moveTick(prev.res, tiles, prev.campfire, next.phase, levels)
         return {elapsedSec,res: result.resource,campfire: result.campfire}
       })}, 1000)
       return () => clearInterval(interval)
-  }, [tiles])
+  }, [tiles, levels])
   return (
     <section>
       <TopBar />
-      <SideBar onInfo={()=>setInfo(prev=>!prev)} infoOpen={info} />
-        {info && (
-          <InfoToggle wood={game.res.wood} gas={game.res.gas} fur={game.res.fur} minerals={game.res.minerals} rates={rates} pos={infoPos} setPos={setInfoPos}/>
-        )}
+      <SideBar onInfo={()=>setInfo(prev=>!prev)} infoOpen={info} onShop={()=>setShop(prev=>!prev)} shopOpen={shop}/>
+        {info && (<InfoToggle wood={game.res.wood} gas={game.res.gas} fur={game.res.fur} minerals={game.res.minerals} rates={rates} pos={infoPos} setPos={setInfoPos}/>)}
+        {shop && <ShopToggle/>}
       <button onClick={()=>setGame(prev=>({...prev, campfire: {...prev.campfire,lit:false,elapsed:0,grace:0}}))}>
         Burner Button 2(test unlocks)
       </button>

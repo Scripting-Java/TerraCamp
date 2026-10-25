@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap');
+.shopToggle{
+    font-family: 'Akaya Telivigala', sans-serif;
+    background: #2f5041;
+    color: #f4f0dc;
+    position: fixed;
+    top:100px;
+    border: 2px solid #426b32;
+    border-radius: 12px;
+    left:100px;
+    width: 420px;
+    padding: 16px;
+    box-sizing:border-box;
+    z-index: 10;
+}
+
+.shopUpgrades, .shopDecor{
+    padding: 12px;
+    margin-bottom: 16px;
+    background: #243b2d;
+    border: 1px solid #426b32;
+    border-radius: 8px;
+}
+
+.shopUpgrades{
+    min-height: 200px;
+}
+
+.shopDecor{
+    min-height: 140px;
+}

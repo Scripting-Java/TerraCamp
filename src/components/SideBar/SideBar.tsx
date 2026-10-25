@@ -3,10 +3,12 @@ import './SideBar.css'
 
 interface sidebar {
     onInfo: () => void,
-    infoOpen: boolean
+    infoOpen: boolean,
+    onShop: ()=>void,
+    shopOpen: boolean
 }
 
-function SideBar({ onInfo, infoOpen }: sidebar) {
+function SideBar({ onInfo, infoOpen, onShop,shopOpen }: sidebar) {
     return (
         <nav className="sidebar">
             <div className="tooltip" data-tooltip="Resources">
@@ -15,7 +17,7 @@ function SideBar({ onInfo, infoOpen }: sidebar) {
                 </button>
             </div>
             <div className="tooltip" data-tooltip="Shop">
-            <button className="sidebarButton">
+            <button className={`sidebarButton ${shopOpen? 'active':''}`} onClick={onShop}>
                 <ShoppingBag size={22} />
             </button>
             </div>

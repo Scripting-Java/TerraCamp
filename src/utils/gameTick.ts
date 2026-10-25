@@ -4,14 +4,15 @@ import type { Tile } from "../types/game";
 import type { campfireStatus } from "./campFire/campfire";
 import campfireTick from "./campFire/campfireTick";
 import type { phase } from "./Phase/dayNightCycle";
+import type { upgradeLevels } from "./shop/upgrades";
 
 interface gameTick{
     resource: resourceCarrier,
     campfire: campfireStatus
 }
 
-function moveTick(prev: resourceCarrier, tiles: Tile[], campfire: campfireStatus, phase: phase): gameTick {
-    const prod = getProduction(tiles)
+function moveTick(prev: resourceCarrier, tiles: Tile[], campfire: campfireStatus, phase: phase, levels:upgradeLevels): gameTick {
+    const prod = getProduction(tiles, levels)
     const produced: resourceCarrier = {
         wood: prev.wood + prod.wood/60,
         fur: prev.fur + prod.fur/60,
