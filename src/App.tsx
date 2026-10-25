@@ -39,21 +39,14 @@ function App() {
   }
   const [infoPos, setInfoPos] = useState({x:100,y:200})
   useEffect(() => {
-    const interval = setInterval(() => {
-      setGame(prev => {
+    const interval = setInterval(() => {setGame(prev => {
         const elapsedSec = prev.elapsedSec + 1
         const next = handleDayNight(elapsedSec)
-
         const result = moveTick(prev.res, tiles, prev.campfire, next.phase)
-        return {
-          elapsedSec,
-          res: result.resource,
-          campfire: result.campfire
-        }
-      })
-    }, 1000)
-    return () => clearInterval(interval)
-  }, [])
+        return {elapsedSec,res: result.resource,campfire: result.campfire}
+      })}, 1000)
+      return () => clearInterval(interval)
+  }, [tiles])
   return (
     <section>
       <TopBar />
@@ -63,6 +56,9 @@ function App() {
         )}
       <button onClick={()=>setGame(prev=>({...prev, campfire: {...prev.campfire,lit:false,elapsed:0,grace:0}}))}>
         Burner Button 2(test unlocks)
+      </button>
+      <button onClick={()=>setGame(prev=>({...prev,res:{wood:100000,gas:100000,fur:1000000,minerals:100000}}))}>
+        Inf Resources
       </button>
       <div>
         <p>Phase: {time.phase}</p>

@@ -10,6 +10,10 @@ import LockedTile from "../lockedTile/lockedTile"
 import mineralTile from "../../assets/MineralTile.png"
 import obeliskTile from "../../assets/ObeliskTile.png"
 import claimedReceiver from "../../assets/ClaimedReceiver.png"
+import redGem from "../../assets/RedGemTile.png"
+import blueGem from "../../assets/BlueGem.png"
+import greenGem from "../../assets/GreenGem.png"
+import yellowGem from "../../assets/YellowGem.png"
 interface GameGrid {
     tiles: Tile[],
     isCampfireLit: boolean,
@@ -35,8 +39,16 @@ function GameGrid({ tiles, isCampfireLit, handleTile, currentRes }: GameGrid) {
                     else
                         tileImg = gemReceiverTile
                 }
-                else if (tile.type === 'gem')
-                    tileCont = "gem goes here"
+                else if (tile.type === 'gem'){
+                    if(tile.gemType==='red')
+                        tileImg = redGem
+                    if(tile.gemType==="blue")
+                        tileImg=blueGem
+                    if(tile.gemType==="green")
+                        tileImg=greenGem
+                    if(tile.gemType==="yellow")
+                        tileImg = yellowGem
+                }
                 else if (tile.type === 'minerals')
                     tileImg = mineralTile
                 else if (tile.type === 'obelisk')
