@@ -22,3 +22,5 @@ function getClosestReceiverTile(tiles: Tile[], gem: Tile): Tile|null{
     }
     return closest
 }
+
+export default getClosestReceiverTile
