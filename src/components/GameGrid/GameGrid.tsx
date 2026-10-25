@@ -8,6 +8,8 @@ import gemReceiverTile from '../../assets/GemTile.png'
 import type { resourceCarrier } from '../../utils/getProd'
 import LockedTile from "../lockedTile/lockedTile"
 import mineralTile from "../../assets/MineralTile.png"
+import obeliskTile from "../../assets/ObeliskTile.png"
+import claimedReceiver from "../../assets/ClaimedReceiver.png"
 interface GameGrid {
     tiles: Tile[],
     isCampfireLit: boolean,
@@ -27,14 +29,18 @@ function GameGrid({ tiles, isCampfireLit, handleTile, currentRes }: GameGrid) {
                     tileImg = valleyTile
                 else if (tile.type === 'earth')
                     tileImg = earthTile
-                else if (tile.type === 'gemReceiver')
-                    tileImg = gemReceiverTile
+                else if (tile.type === 'gemReceiver'){
+                    if(tile.recieverClaimed)
+                        tileImg=claimedReceiver
+                    else
+                        tileImg = gemReceiverTile
+                }
                 else if (tile.type === 'gem')
                     tileCont = "gem goes here"
                 else if (tile.type === 'minerals')
                     tileImg = mineralTile
                 else if (tile.type === 'obelisk')
-                    tileCont = 'obelisk goes here'
+                    tileImg = obeliskTile
                 return (
                     <div className='tile' key={tile.id} style={{ gridColumn: tile.x + 6, gridRow: tile.y + 6 }}>
                         {tile.unlocked?(tileImg?(<img src={tileImg}/>): (tileCont)):(
