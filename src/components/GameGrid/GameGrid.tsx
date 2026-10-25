@@ -7,6 +7,7 @@ import earthTile from '../../assets/EarthTile.png'
 import gemReceiverTile from '../../assets/GemTile.png'
 import type { resourceCarrier } from '../../utils/getProd'
 import LockedTile from "../lockedTile/lockedTile"
+import mineralTile from "../../assets/MineralTile.png"
 interface GameGrid {
     tiles: Tile[],
     isCampfireLit: boolean,
@@ -31,7 +32,7 @@ function GameGrid({ tiles, isCampfireLit, handleTile, currentRes }: GameGrid) {
                 else if (tile.type === 'gem')
                     tileCont = "gem goes here"
                 else if (tile.type === 'minerals')
-                    tileCont = 'Mineral goes here'
+                    tileImg = mineralTile
                 else if (tile.type === 'obelisk')
                     tileCont = 'obelisk goes here'
                 return (

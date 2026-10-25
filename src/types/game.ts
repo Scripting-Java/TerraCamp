@@ -1,7 +1,7 @@
 import type { resourceCarrier } from "../utils/getProd"
 
 export type Tiles = 'campfire'| 'valley'| 'earth'| 'minerals'| 'obelisk'| 'gem'| 'gemReceiver'
-
+export type gemType = 'red'|'green'|'blue'|'yellow'
 export interface Tile{
     id: number,
     type: Tiles,
@@ -9,4 +9,5 @@ export interface Tile{
     y: number,
     unlocked: boolean
     cost?: resourceCarrier
+    gemType?: gemType
 }
