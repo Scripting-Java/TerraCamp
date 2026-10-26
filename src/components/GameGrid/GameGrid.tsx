@@ -15,6 +15,10 @@ import blueGem from "../../assets/BlueGem.png"
 import greenGem from "../../assets/GreenGem.png"
 import yellowGem from "../../assets/YellowGem.png"
 import cozy from "../../assets/CampCozy.png"
+import blue from "../../assets/BlueCampFire.png"
+import red from "../../assets/RedCampFire.png"
+import olympic from "../../assets/Olympic.png"
+import olympicblue from "../../assets/OlympicBlue.png"
 import type { campfireStyle } from '../../utils/campFire/campfire'
 
 interface GameGrid {
@@ -28,10 +32,10 @@ interface GameGrid {
 const campfireImages: Record<campfireStyle, string> = {
     default: campfireLit,
     cozy: cozy,
-    redFlameDecor: campfireLit,
-    blueFlameDecor: campfireLit,
-    blueBeacon: campfireLit,
-    olympicTorch: campfireLit
+    redFlameDecor: red,
+    blueFlameDecor: blue,
+    blueBeacon: olympicblue,
+    olympicTorch: olympic
 }
 
 function GameGrid({ tiles, isCampfireLit, handleTile, currentRes, style }: GameGrid) {
