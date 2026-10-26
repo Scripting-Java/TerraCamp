@@ -124,21 +124,21 @@ function App() {
       {info && (<InfoToggle wood={game.res.wood} gas={game.res.gas} fur={game.res.fur} minerals={game.res.minerals} rates={rates} pos={infoPos} setPos={setInfoPos} />)}
       {shop && <ShopToggle levels={levels} gas={game.res.gas} buy={handleUpgrade} pos={shopPos} setPos={setShopPos} ownedDecor={ownedDecor} buyDecor={handleBuyDecor} equip={handleEquip} style={game.campfire.style} />}
       {settings &&(<Settings theme={theme} setTheme={setTheme} onClose={()=>setSettings(false)}/>)}
-      <button onClick={() => setGame(prev => ({ ...prev, campfire: { ...prev.campfire, lit: false, elapsed: 0, grace: 0 } }))}>
-        Burner Button 2(test unlocks)
-      </button>
+      <details>
+        <summary>Cheats & Extra Info</summary> 
       <button onClick={() => setGame(prev => ({ ...prev, res: { wood: 100000, gas: 100000, fur: 1000000, minerals: 100000 } }))}>
-        Inf Resources
+        Inf Resources. Only for testing. Reload the page to actually play the game again.
       </button>
       <div>
         <p>Phase: {time.phase}</p>
-        <p>Time remaining: {time.remaining} (seconds)</p>
+        <p>Time remaining(for {time.phase}): {time.remaining} seconds</p>
       </div>
       <div>
         <p>Campfire: {game.campfire.lit ? 'Lit' : 'Out'}</p>
         <p>GracePeriod: {game.campfire.grace}/30 seconds</p>
         <p>Fuel timer: {game.campfire.elapsed} seconds</p>
       </div>
+      </details>
       <section>
         <GameGrid tiles={getVisible(tiles)} currentRes={game.res} isCampfireLit={game.campfire.lit} style={game.campfire.style} handleTile={(id) => {
           if (!game.campfire.lit)
