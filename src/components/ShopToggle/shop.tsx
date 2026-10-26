@@ -4,6 +4,8 @@ import { getUpgradeBonus, getUpgradeCost } from "../../utils/shop/upgrades"
 import formatRes from "../../utils/formatters/formatters"
 import { useRef } from "react"
 import { Move } from "lucide-react"
+import type { campfireStyle } from "../../utils/campFire/campfire"
+import { decors } from "../../utils/shop/decor"
 
 
 interface Shop {
@@ -11,7 +13,11 @@ interface Shop {
     gas: number,
     buy: (type: upgradeType) => void,
     pos: { x: number, y: number },
-    setPos: React.Dispatch<React.SetStateAction<{ x: number, y: number }>>
+    setPos: React.Dispatch<React.SetStateAction<{ x: number, y: number }>>,
+    ownedDecor: string[],
+    buyDecor: (id: string) => void,
+    equip: (id: string) => void,
+    style: campfireStyle
 }
 const upgradeNames: { type: upgradeType; name: string }[] = [
     { type: "wood", name: "Wood Production" },
@@ -19,7 +25,7 @@ const upgradeNames: { type: upgradeType; name: string }[] = [
     { type: "gas", name: "Gas Production" },
     { type: "minerals", name: "Mineral Production" },
 ]
-function ShopToggle({ levels, gas, buy, pos, setPos }: Shop) {
+function ShopToggle({ levels, gas, buy, pos, setPos, ownedDecor,buyDecor,equip,style }: Shop) {
     const drag = useRef<{ startX: number, startY: number, startPosX: number, startPosY: number } | null>(null)
     const panelReference = useRef<HTMLElement>(null)
     function handleClick(e: React.PointerEvent<HTMLDivElement>) {
@@ -73,6 +79,26 @@ function ShopToggle({ levels, gas, buy, pos, setPos }: Shop) {
             </div>
             <div className="shopDecor">
                 <h3>Decor</h3>
+                {decors.map(dec=>{
+                    const owned = ownedDecor.includes(dec.id)
+                    const equipped = style === dec.style
+                    return(
+                        <div className="shopUpgrade" key={dec.id}>
+                            <img src={dec.thumbnail} className="thumbnail"/>
+                            <div>
+                                <h3>{dec.name}</h3>
+                                <p>{dec.desc}</p>
+                                <p>Cost: {dec.cost} Gas</p>
+
+                                {!owned ? (<button disabled={gas < dec.cost} onClick={() => buyDecor(dec.id)}>
+                                Buy
+                                </button>):(<button disabled={equipped} onClick={() => equip(dec.id)}>
+                                {equipped ? "Equipped" : "Equip"}
+                                </button>)}
+                            </div>
+                        </div>
+                    )
+                })}
             </div>
         </section>
     )

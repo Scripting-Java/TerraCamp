@@ -15,6 +15,7 @@ import type { upgradeLevels } from './utils/shop/upgrades'
 import ShopToggle from './components/ShopToggle/shop'
 import { buyUpgrade } from './utils/shop/upgrades'
 import type { upgradeType } from './utils/shop/upgrades'
+import { decors } from './utils/shop/decor'
 
 import { useState, useEffect } from 'react'
 import './App.css'
@@ -46,6 +47,22 @@ function App() {
   }
   const [infoPos, setInfoPos] = useState({x:100,y:200})
   const [shopPos, setShopPos] = useState({x:100,y:100})
+  const [ownedDecor, setOwnedDecor] = useState<string[]>([])
+  function handleBuyDecor(id:string){
+    const dec = decors.find(decor=>decor.id === id)
+    if(!dec||ownedDecor.includes(id)|| game.res.gas<dec.cost)
+      return
+    setOwnedDecor(prev=>[...prev,id])
+    setGame(prev=>({...prev,res:{...prev.res, gas: prev.res.gas-dec.cost}}))
+  }
+  function handleEquip(id:string){
+    if(!ownedDecor.includes(id)) 
+      return
+    const item = decors.find(decor=>decor.id===id)
+    if(!item)
+      return
+    setGame(prev=>({...prev, campfire:{...prev.campfire,style:item.style}}))
+  }
 
   function handleUpgrade(type: upgradeType){
     const result = buyUpgrade(type,levels,game.res.gas)
@@ -68,7 +85,7 @@ function App() {
       <TopBar />
       <SideBar onInfo={()=>setInfo(prev=>!prev)} infoOpen={info} onShop={()=>setShop(prev=>!prev)} shopOpen={shop}/>
         {info && (<InfoToggle wood={game.res.wood} gas={game.res.gas} fur={game.res.fur} minerals={game.res.minerals} rates={rates} pos={infoPos} setPos={setInfoPos}/>)}
-        {shop && <ShopToggle levels={levels} gas={game.res.gas} buy={handleUpgrade} pos={shopPos} setPos={setShopPos}/>}
+        {shop && <ShopToggle levels={levels} gas={game.res.gas} buy={handleUpgrade} pos={shopPos} setPos={setShopPos} ownedDecor={ownedDecor} buyDecor={handleBuyDecor} equip={handleEquip} style={game.campfire.style}/>}
       <button onClick={()=>setGame(prev=>({...prev, campfire: {...prev.campfire,lit:false,elapsed:0,grace:0}}))}>
         Burner Button 2(test unlocks)
       </button>
