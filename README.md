@@ -1,32 +1,56 @@
-# React + TypeScript + Vite
+# Terra Camp
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A cozy exploration and resource game. It has elements of an idle game, but it's different from the last one I've built. Explore a randomly generated world, gather resources, expand your campsite, and discover four hidden gems to win!
 
-Currently, two official plugins are available:
+**Github:** (https://scripting-java.github.io/TerraCamp/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Explore and unlock tiles across a wilderness map.
+- Gather wood, gas, fur, and minerals.
+- Manage your campfire through day and night cycles.
+- Purchase resource production upgrades with gas in the store.
+- Customize your campfire with decorative styles. Note: Some of them aren't very good, but I'm getting better as I'm learning how to draw so...
+- Discover four gems and obelisks.
+- Customize the game's visual theme(settings).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Getting Started
 
-## Expanding the Oxlint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+- [Node.js](https://nodejs.org/)
+- npm (included with Node.js)
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+### Installation
+
+Clone the repository and enter its directory:
+
+```bash
+git clone https://github.com/Scripting-Java/TerraCamp.git
+cd TerraCamp
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Install dependencies and start the development server:
+
+```bash
+npm install
+npm run dev
+```
+
+Open the local URL(control + click in vscode or you type it out)
+
+## Available Commands
+
+| Command | Description |
+| --- | --- |
+| `npm install` | Install dependencies(This project uses lucide icons so you might have to run this command) |
+| `npm run dev` | Starts the game|
+| `npm run build` | builds the project|
+
+
+
+## Page:
+Website:
+
+## How To Play:
+Your main job is to keep the campfire alive. To do this, you get wood from surrounding tiles. It is automatically collected and if you want to see what you're getting hit the info on the sidebar to the left. as you get enough resources, you can expand outwards. If you want to upgrade your tiles because getting new ones are hard, you can do so in the shop. After getting all the upgrades, or just for fun, you can look at the different decor options. As you keep expanding, you'll reach obelisks which give you small production buffs, and gems which give you slightly larger, and more specific production buffs. 
