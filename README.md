@@ -50,7 +50,7 @@ Open the local URL(control + click in vscode or you type it out)
 
 
 ## Page:
-Website:
+Website: https://scripting-java.github.io/TerraCamp/
 
 ## How To Play:
 Your main job is to keep the campfire alive. To do this, you get wood from surrounding tiles. It is automatically collected and if you want to see what you're getting hit the info on the sidebar to the left. as you get enough resources, you can expand outwards. If you want to upgrade your tiles because getting new ones are hard, you can do so in the shop. After getting all the upgrades, or just for fun, you can look at the different decor options. As you keep expanding, you'll reach obelisks which give you small production buffs, and gems which give you slightly larger, and more specific production buffs. 
