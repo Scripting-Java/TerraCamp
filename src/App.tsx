@@ -47,7 +47,7 @@ function App() {
   }
   const [infoPos, setInfoPos] = useState({x:100,y:200})
   const [shopPos, setShopPos] = useState({x:100,y:100})
-  const [ownedDecor, setOwnedDecor] = useState<string[]>([])
+  const [ownedDecor, setOwnedDecor] = useState<string[]>(["default"])
   function handleBuyDecor(id:string){
     const dec = decors.find(decor=>decor.id === id)
     if(!dec||ownedDecor.includes(id)|| game.res.gas<dec.cost)
@@ -102,7 +102,7 @@ function App() {
         <p>Fuel timer: {game.campfire.elapsed} seconds</p>
       </div>
       <section>
-        <GameGrid tiles={getVisible(tiles)} currentRes={game.res} isCampfireLit={game.campfire.lit} handleTile={(id)=> {
+        <GameGrid tiles={getVisible(tiles)} currentRes={game.res} isCampfireLit={game.campfire.lit} style={game.campfire.style} handleTile={(id)=> {
           if(!game.campfire.lit)
             return
           const newTiles = unlock(tiles,id,game.res)
