@@ -5,10 +5,12 @@ interface sidebar {
     onInfo: () => void,
     infoOpen: boolean,
     onShop: ()=>void,
-    shopOpen: boolean
+    shopOpen: boolean,
+    onSettings: ()=>void,
+    settingsOpen: boolean
 }
 
-function SideBar({ onInfo, infoOpen, onShop,shopOpen }: sidebar) {
+function SideBar({ onInfo, infoOpen, onShop,shopOpen, onSettings,settingsOpen }: sidebar) {
     return (
         <nav className="sidebar">
             <div className="tooltip" data-tooltip="Resources">
@@ -22,7 +24,7 @@ function SideBar({ onInfo, infoOpen, onShop,shopOpen }: sidebar) {
             </button>
             </div>
             <div className="tooltip" data-tooltip="Settings">
-            <button className="sidebarButton">
+            <button className={`sidebarButton ${settingsOpen ? 'active' : ''}`} onClick={onSettings}>
                 <Settings size={22} />
             </button>
             </div>

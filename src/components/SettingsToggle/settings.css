@@ -1,0 +1,33 @@
+.settings {
+    position: fixed;
+    top: 100px;
+    left: 100px;
+    z-index: 20;
+    width: 320px;
+    padding: 16px;
+    box-sizing: border-box;
+    background: var(--panel-bg, #2f5041);
+    color: var(--text-color, #f4f0dc);
+    border: 2px solid var(--border-color, #426b32);
+    border-radius: 12px;
+    font-family: 'Akaya Telivigala', sans-serif;
+}
+
+.settings h1 {
+    margin: 0 0 16px;
+}
+
+.settings button,
+.settings select {
+    padding: 6px 10px;
+    color: var(--text-color, #f4f0dc);
+    background: var(--button-bg, #426b32);
+    border: 1px solid var(--border-color, #66844a);
+    border-radius: 6px;
+    font-family: inherit;
+}
+
+.settings select {
+    width: 100%;
+    margin-top: 8px;
+}

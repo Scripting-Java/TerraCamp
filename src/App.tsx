@@ -16,6 +16,7 @@ import ShopToggle from './components/ShopToggle/shop'
 import { buyUpgrade } from './utils/shop/upgrades'
 import type { upgradeType } from './utils/shop/upgrades'
 import { decors } from './utils/shop/decor'
+import Settings from './components/SettingsToggle/settings'
 
 import { useState, useEffect } from 'react'
 import './App.css'
@@ -32,64 +33,101 @@ function App() {
     res: { wood: 0, gas: 0, fur: 0, minerals: 0 },
     campfire: { lit: true, elapsed: 0, grace: 0, tier: 'small', style: 'default' }
   })
-  const [info,setInfo] = useState(false)
-  const [shop,setShop]=useState(false)
+  const [info, setInfo] = useState(false)
+  const [shop, setShop] = useState(false)
+  const[settings, setSettings] = useState(false)
   const time = handleDayNight(game.elapsedSec)
-  const [tiles, setTiles] = useState<Tile[]>(()=>build())
-  const [levels,setLevels] = useState<upgradeLevels>(starting)
+  const [tiles, setTiles] = useState<Tile[]>(() => build())
+  const [levels, setLevels] = useState<upgradeLevels>(starting)
   const prod = getProduction(tiles, levels)
   const rates = {
-    woodGain: prod.wood/60,
-    woodUse: game.campfire.lit?(time.phase==='day' ? 1/120: 1/30):0,
-    gasGain: prod.gas/60,
-    furGain: prod.fur/60,
-    mineralsGain: prod.minerals/60
+    woodGain: prod.wood / 60,
+    woodUse: game.campfire.lit ? (time.phase === 'day' ? 1 / 120 : 1 / 30) : 0,
+    gasGain: prod.gas / 60,
+    furGain: prod.fur / 60,
+    mineralsGain: prod.minerals / 60
   }
-  const [infoPos, setInfoPos] = useState({x:100,y:200})
-  const [shopPos, setShopPos] = useState({x:100,y:100})
+  const [infoPos, setInfoPos] = useState({ x: 100, y: 200 })
+  const [shopPos, setShopPos] = useState({ x: 100, y: 100 })
+  const [theme, setTheme] = useState('TerraCamp')
+  const themes: Record<string, Record<string, string>> = {
+    TerraCamp: {
+      '--panel-bg': '#2f5041',
+      '--text-color': '#f4f0dc',
+      '--border-color': '#426b32',
+      '--button-bg': '#426b32',
+    },
+    Fall: {
+      '--panel-bg': '#593b2b',
+      '--text-color': '#fff0d5',
+      '--border-color': '#a65f32',
+      '--button-bg': '#874b2a',
+    },
+    Dark: {
+      '--panel-bg': '#252d46',
+      '--text-color': '#edf0ff',
+      '--border-color': '#596b9e',
+      '--button-bg': '#3c4c78',
+    },
+    Purple: {
+      '--panel-bg': '#453653',
+      '--text-color': '#f8edff',
+      '--border-color': '#9878b5',
+      '--button-bg': '#72558f',
+    }
+  }
+  useEffect(()=>{
+    const colors = themes[theme]
+    for(const[property, value] of Object.entries(colors)){
+      document.documentElement.style.setProperty(property, value)
+    }
+  },[theme])
   const [ownedDecor, setOwnedDecor] = useState<string[]>(["default"])
-  function handleBuyDecor(id:string){
-    const dec = decors.find(decor=>decor.id === id)
-    if(!dec||ownedDecor.includes(id)|| game.res.gas<dec.cost)
+  function handleBuyDecor(id: string) {
+    const dec = decors.find(decor => decor.id === id)
+    if (!dec || ownedDecor.includes(id) || game.res.gas < dec.cost)
       return
-    setOwnedDecor(prev=>[...prev,id])
-    setGame(prev=>({...prev,res:{...prev.res, gas: prev.res.gas-dec.cost}}))
+    setOwnedDecor(prev => [...prev, id])
+    setGame(prev => ({ ...prev, res: { ...prev.res, gas: prev.res.gas - dec.cost } }))
   }
-  function handleEquip(id:string){
-    if(!ownedDecor.includes(id)) 
+  function handleEquip(id: string) {
+    if (!ownedDecor.includes(id))
       return
-    const item = decors.find(decor=>decor.id===id)
-    if(!item)
+    const item = decors.find(decor => decor.id === id)
+    if (!item)
       return
-    setGame(prev=>({...prev, campfire:{...prev.campfire,style:item.style}}))
+    setGame(prev => ({ ...prev, campfire: { ...prev.campfire, style: item.style } }))
   }
 
-  function handleUpgrade(type: upgradeType){
-    const result = buyUpgrade(type,levels,game.res.gas)
-    if(!result) return
+  function handleUpgrade(type: upgradeType) {
+    const result = buyUpgrade(type, levels, game.res.gas)
+    if (!result) return
     setLevels(result.levels)
-    setGame(prev=>({...prev,res:{...prev.res,gas:result.gas}}))
+    setGame(prev => ({ ...prev, res: { ...prev.res, gas: result.gas } }))
   }
 
   useEffect(() => {
-    const interval = setInterval(() => {setGame(prev => {
+    const interval = setInterval(() => {
+      setGame(prev => {
         const elapsedSec = prev.elapsedSec + 1
         const next = handleDayNight(elapsedSec)
         const result = moveTick(prev.res, tiles, prev.campfire, next.phase, levels)
-        return {elapsedSec,res: result.resource,campfire: result.campfire}
-      })}, 1000)
-      return () => clearInterval(interval)
+        return { elapsedSec, res: result.resource, campfire: result.campfire }
+      })
+    }, 1000)
+    return () => clearInterval(interval)
   }, [tiles, levels])
   return (
     <section>
       <TopBar />
-      <SideBar onInfo={()=>setInfo(prev=>!prev)} infoOpen={info} onShop={()=>setShop(prev=>!prev)} shopOpen={shop}/>
-        {info && (<InfoToggle wood={game.res.wood} gas={game.res.gas} fur={game.res.fur} minerals={game.res.minerals} rates={rates} pos={infoPos} setPos={setInfoPos}/>)}
-        {shop && <ShopToggle levels={levels} gas={game.res.gas} buy={handleUpgrade} pos={shopPos} setPos={setShopPos} ownedDecor={ownedDecor} buyDecor={handleBuyDecor} equip={handleEquip} style={game.campfire.style}/>}
-      <button onClick={()=>setGame(prev=>({...prev, campfire: {...prev.campfire,lit:false,elapsed:0,grace:0}}))}>
+      <SideBar onInfo={() => setInfo(prev => !prev)} infoOpen={info} onShop={() => setShop(prev => !prev)} shopOpen={shop} onSettings={()=>setSettings(prev=>!prev)} settingsOpen={settings} />
+      {info && (<InfoToggle wood={game.res.wood} gas={game.res.gas} fur={game.res.fur} minerals={game.res.minerals} rates={rates} pos={infoPos} setPos={setInfoPos} />)}
+      {shop && <ShopToggle levels={levels} gas={game.res.gas} buy={handleUpgrade} pos={shopPos} setPos={setShopPos} ownedDecor={ownedDecor} buyDecor={handleBuyDecor} equip={handleEquip} style={game.campfire.style} />}
+      {settings &&(<Settings theme={theme} setTheme={setTheme} onClose={()=>setSettings(false)}/>)}
+      <button onClick={() => setGame(prev => ({ ...prev, campfire: { ...prev.campfire, lit: false, elapsed: 0, grace: 0 } }))}>
         Burner Button 2(test unlocks)
       </button>
-      <button onClick={()=>setGame(prev=>({...prev,res:{wood:100000,gas:100000,fur:1000000,minerals:100000}}))}>
+      <button onClick={() => setGame(prev => ({ ...prev, res: { wood: 100000, gas: 100000, fur: 1000000, minerals: 100000 } }))}>
         Inf Resources
       </button>
       <div>
@@ -97,20 +135,20 @@ function App() {
         <p>Time remaining: {time.remaining} (seconds)</p>
       </div>
       <div>
-        <p>Campfire: {game.campfire.lit ? 'Lit': 'Out'}</p>
+        <p>Campfire: {game.campfire.lit ? 'Lit' : 'Out'}</p>
         <p>GracePeriod: {game.campfire.grace}/30 seconds</p>
         <p>Fuel timer: {game.campfire.elapsed} seconds</p>
       </div>
       <section>
-        <GameGrid tiles={getVisible(tiles)} currentRes={game.res} isCampfireLit={game.campfire.lit} style={game.campfire.style} handleTile={(id)=> {
-          if(!game.campfire.lit)
+        <GameGrid tiles={getVisible(tiles)} currentRes={game.res} isCampfireLit={game.campfire.lit} style={game.campfire.style} handleTile={(id) => {
+          if (!game.campfire.lit)
             return
-          const newTiles = unlock(tiles,id,game.res)
-          if(newTiles){
+          const newTiles = unlock(tiles, id, game.res)
+          if (newTiles) {
             setTiles(newTiles.tiles)
-            setGame(prev=>({...prev,res:newTiles.resources}))
+            setGame(prev => ({ ...prev, res: newTiles.resources }))
           }
-        }}/>
+        }} />
       </section>
     </section>
   )
